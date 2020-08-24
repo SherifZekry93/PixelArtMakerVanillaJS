@@ -1,37 +1,51 @@
-// Select color input
-var colorInput = document.getElementById("colorPicker")
-
-let table = document.getElementById("pixelCanvas")
-
-var cells = document.getElementsByClassName("cells")
-// Select size input
-var inputWidth = document.getElementById("inputWidth");
-
-var inputHeight = document.getElementById("inputHeight");
-// When size is submitted by the user, call makeGrid()
-
-
-function makeGrid()
-{
-  table.innerHTML = "";
-  var rows = inputHeight.value
-  var cols = inputWidth.value
-
-  for(var i=0;i<rows;i++)
+const myModule = (function(){
+  'use strict'
+  const colorInput = document.getElementById("colorPicker")
+  const myDivContainer = document.getElementById("pixelCanvas")
+  // Select size input
+  const inputWidth = document.getElementById("inputWidth");
+  const inputHeight = document.getElementById("inputHeight");
+  // When size is submitted by the user, call makeGrid()
+  
+  function __setButtonClick(actionFunction)
   {
-    let NewRow = table.insertRow(i); 
-    for(var m=0;m<cols;m++)
-    {
-      var Newcell1 = NewRow.insertCell(m);
+    document.getElementById("buttonCreateGrid").addEventListener('click',__makeGrid);
+  }
 
-      Newcell1.addEventListener("click",setColor)
+  function __makeGrid()
+  {
+    myDivContainer.innerHTML="";
+    const rows = inputWidth.value
+    const cols = inputHeight.value
+    for(let i =0;i<rows;i++)
+    {
+      const div = document.createElement('div');
+      myDivContainer.appendChild(div);
+      for(let j =0;j<cols;j++)
+      {
+        const newColumn = document.createElement('div')
+        div.append(newColumn);
+      }
     }
   }
-}
 
-
-
-function setColor(event)
-{
-  event.target.style.backgroundColor = colorInput.value
-}
+  function __setPixelClick()
+  {
+    myDivContainer.addEventListener("click",__setColor);
+  }
+  function __setColor(event)
+  {
+    if(!event.target.querySelector('div'))
+    {
+      event.target.style.backgroundColor = colorInput.value
+    }
+  }
+  return {
+    makeGrid:__makeGrid,
+    settButtonClick:__setButtonClick,
+    setPixelClick:__setPixelClick,
+    setColor:__setColor
+  }
+})()
+myModule.settButtonClick()
+myModule.setPixelClick();

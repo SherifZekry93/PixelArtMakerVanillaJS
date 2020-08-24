@@ -16,26 +16,24 @@ h2:first-of-type {
   margin-top: 0.5em;
 }
 
-table,
-tr,
-td {
-  border: 1px solid black;
-}
-
-table {
-  border-collapse: collapse;
-  margin: 0 auto;
-}
-
-tr {
-  height: 20px;
-}
-
-td {
-  width: 20px;
-}
 
 input[type="number"] {
   width: 6em;
 }
 
+#pixelCanvas
+{
+
+  display:inline-flex;
+}
+#pixelCanvas div >div
+{
+
+  border: 1px solid black;
+  flex-grow: 1;
+  flex-basis: 0;
+  min-width: 50px;
+  max-width: 50px;
+  margin: 1px;
+  height: 50px;
+}
